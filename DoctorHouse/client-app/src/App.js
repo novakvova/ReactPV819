@@ -1,43 +1,41 @@
-import logo from './logo.svg';
-import 'antd/dist/antd.css';
-// import { DatePicker } from 'antd';
+import React, { Suspense } from 'react';
 import './App.css';
-import React, { Component, Suspense } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { Layout, Breadcrumb } from 'antd';
+import { Route, Switch } from 'react-router';
+import { Layout } from 'antd';
+import { home, signIn, signUp } from './components/common/routes-directions';
 
-const HomePage = React.lazy(()=> import('./components/home'));
-const Navbar = React.lazy(()=> import('./components/navbar'));
+const { Header, Content, Footer } = Layout;
 
-const { Content, Footer } = Layout;
+const HomePage = React.lazy(() => import('./components/home'));
+const Navbar = React.lazy(() => import('./components/navbar'));
+const Login = React.lazy(() => import('./components/sign-in/sign-in-component'));
+const SignUp = React.lazy(() => import('./components/sign-up/sign-up-component'));
 
-class App extends Component {
+const App = () => {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
 
-    render() { 
-        return (
-          <Suspense fallback={<p>Loading ...</p>}>
-            <Layout className="layout" style={{height: "100vh"}}>
-              <Navbar />
-              <Content style={{ padding: "0 50px" }}>
-                <Breadcrumb style={{ margin: "16px 0" }}>
-                  <Breadcrumb.Item>Home</Breadcrumb.Item>
-                  <Breadcrumb.Item>List</Breadcrumb.Item>
-                  <Breadcrumb.Item>App</Breadcrumb.Item>
-                </Breadcrumb>
-                <div className="site-layout-content">
-                  <Switch>
-                    <Route exact path="/" render={() => <HomePage />} />
-                  </Switch>
-                </div>
-              </Content>
-              <Footer style={{ textAlign: "center" }}>
-                Ant Design ©2018 Created by Ant UED
-              </Footer>
-            </Layout>
-            {/* <DatePicker /> */}
-          </Suspense>
-        );
-    }
+      <Layout className="layout" style={{ height: "100vh" }}>
+
+        <Header>
+          <Navbar />
+        </Header>
+
+        <Content style={{ padding: '0 50px' }}>
+          <Switch>
+            <Route exact path={home} render={() => <HomePage />} />
+            <Route exact path={signIn} render={() => <Login />} />
+            <Route exact path={signUp} render={() => <SignUp />} />
+
+          </Switch>
+        </Content>
+
+        <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+
+      </Layout>
+
+    </Suspense>
+  )
 }
 
 export default App;
