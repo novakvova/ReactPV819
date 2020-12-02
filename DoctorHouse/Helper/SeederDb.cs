@@ -1,4 +1,5 @@
-﻿using DoctorHouse.DAL.Entities;
+﻿using DoctorHouse.Constants;
+using DoctorHouse.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -10,67 +11,43 @@ namespace DoctorHouse.Helper
         public static void SeedData(UserManager<DbUser> userManager,
                    RoleManager<DbRole> roleManager)
         {
-            var adminRoleName = "Admin";
-            var userRoleName = "User";
+            CreateUpdateRole(roleManager, Roles.Admin);
+            CreateUpdateRole(roleManager, Roles.Doctor);
+            CreateUpdateRole(roleManager, Roles.Client);
 
-            var roleResult = roleManager.FindByNameAsync(adminRoleName).Result;
+            CreateUpdateUser(userManager, "admin@gmail.com", "Qwerty1*", Roles.Admin);
+        }
+
+        private static void CreateUpdateRole(RoleManager<DbRole> roleManager,
+            string role)
+        {
+            var roleResult = roleManager.FindByNameAsync(role).Result;
             if (roleResult == null)
             {
                 var roleresult = roleManager.CreateAsync(new DbRole
                 {
-                    Name = adminRoleName
+                    Name = role
 
                 }).Result;
             }
-            roleResult = roleManager.FindByNameAsync(userRoleName).Result;
-            if (roleResult == null)
-            {
-                var roleresult = roleManager.CreateAsync(new DbRole
-                {
-                    Name = userRoleName
+        }
 
-                }).Result;
-            }
-
-
-            var email = "admin@gmail.com";
-
+        private static void CreateUpdateUser(UserManager<DbUser> userManager,
+            string email, string password, string role)
+        {
             var findUser = userManager.FindByEmailAsync(email).Result;
             if (findUser == null)
             {
                 var user = new DbUser
                 {
                     Email = email,
-                    UserName = email,
-                    Image = "https://cdn.pixabay.com/photo/2017/07/28/23/34/fantasy-picture-2550222_960_720.jpg",
-                    Age = 30,
-                    Phone = "+380957476156",
-                    Description = "PHP programmer"
+                    UserName = email
                 };
-                var result = userManager.CreateAsync(user, "Qwerty1-").Result;
-
-                result = userManager.AddToRoleAsync(user, adminRoleName).Result;
-            }
-
-            email = "user@gmail.com";
-            findUser = userManager.FindByEmailAsync(email).Result;
-            if (findUser == null)
-            {
-                var user = new DbUser
-                {
-                    Email = email,
-                    UserName = email,
-                    Image = "https://cdn.pixabay.com/photo/2017/07/28/23/34/fantasy-picture-2550222_960_720.jpg",
-                    Age = 30,
-                    Phone = "+380988005535",
-                    Description = "User"
-                };
-                var result = userManager.CreateAsync(user, "Qwerty1-").Result;
-
-                result = userManager.AddToRoleAsync(user, userRoleName).Result;
+                var result = userManager.CreateAsync(user, password).Result;
+                result = userManager.AddToRoleAsync(user, role).Result;
             }
         }
-
+        
         public static void SeedDataByAS(IServiceProvider services)
         {
             using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())

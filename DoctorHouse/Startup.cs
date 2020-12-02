@@ -1,6 +1,9 @@
 using DoctorHouse.DAL;
+using DoctorHouse.DAL.Entities;
+using DoctorHouse.Helper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +26,12 @@ namespace DoctorHouse
         {
             services.AddDbContext<EFContext>(options =>
               options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<DbUser, DbRole>(options => 
+                    options.Stores.MaxLengthForKeys = 128)
+                .AddEntityFrameworkStores<EFContext>()
+                .AddDefaultTokenProviders();
+
 
             services.AddControllersWithViews();
 
@@ -68,6 +77,7 @@ namespace DoctorHouse
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+            SeederDB.SeedDataByAS(app.ApplicationServices);
         }
     }
 }

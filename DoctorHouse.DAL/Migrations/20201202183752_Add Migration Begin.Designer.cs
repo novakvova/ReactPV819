@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DoctorHouse.DAL.Migrations
 {
     [DbContext(typeof(EFContext))]
-    [Migration("20201202171005_Add Migration Begin")]
+    [Migration("20201202183752_Add Migration Begin")]
     partial class AddMigrationBegin
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,16 +59,9 @@ namespace DoctorHouse.DAL.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Age")
-                        .HasColumnType("integer");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("text");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("character varying(255)")
-                        .HasMaxLength(255);
 
                     b.Property<string>("Email")
                         .HasColumnType("character varying(256)")
@@ -76,10 +69,6 @@ namespace DoctorHouse.DAL.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("boolean");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("character varying(255)")
-                        .HasMaxLength(255);
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("boolean");
@@ -97,10 +86,6 @@ namespace DoctorHouse.DAL.Migrations
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("text");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("character varying(255)")
-                        .HasMaxLength(255);
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("text");
@@ -194,10 +179,12 @@ namespace DoctorHouse.DAL.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<long>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("text");
@@ -218,10 +205,12 @@ namespace DoctorHouse.DAL.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(128);
 
                     b.Property<string>("Value")
                         .HasColumnType("text");
