@@ -285,10 +285,12 @@
           <e p="Roles.cs" t="Include" />
         </e>
         <e p="Controllers" t="Include">
+          <e p="AccountController.cs" t="Include" />
           <e p="WeatherForecastController.cs" t="Include" />
         </e>
         <e p="DoctorHouse.csproj" t="IncludeRecursive" />
         <e p="Helper" t="Include">
+          <e p="CustomValidator.cs" t="Include" />
           <e p="SeederDb.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
@@ -335,10 +337,13 @@
       </e>
       <e p="DoctorHouse.Infrastructure" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
-        <e p="Class1.cs" t="Include" />
         <e p="DoctorHouse.Infrastructure.csproj" t="IncludeRecursive" />
         <e p="Interfaces" t="Include">
           <e p="IJwtTokenService.cs" t="Include" />
+        </e>
+        <e p="Models" t="Include">
+          <e p="UserLoginModel.cs" t="Include" />
+          <e p="UserRegisterModel.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
