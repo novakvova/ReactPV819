@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoctorHouse", "DoctorHouse\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorHouse.DAL", "DoctorHouse.DAL\DoctorHouse.DAL.csproj", "{AB005CBF-FF6F-4C6A-8126-75BE2FB08ED0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorHouse.Infrastructure", "DoctorHouse.Infrastructure\DoctorHouse.Infrastructure.csproj", "{73DC0E31-029C-4C03-BB25-F90E5A56B5BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AB005CBF-FF6F-4C6A-8126-75BE2FB08ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB005CBF-FF6F-4C6A-8126-75BE2FB08ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB005CBF-FF6F-4C6A-8126-75BE2FB08ED0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73DC0E31-029C-4C03-BB25-F90E5A56B5BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73DC0E31-029C-4C03-BB25-F90E5A56B5BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73DC0E31-029C-4C03-BB25-F90E5A56B5BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73DC0E31-029C-4C03-BB25-F90E5A56B5BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
