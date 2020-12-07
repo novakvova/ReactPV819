@@ -7,20 +7,34 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityServerHost.Quickstart.UI;
 
 namespace DoctorHouse.IdentityServer
 {
     public class Startup
     {
+        public IWebHostEnvironment Environment { get; }
+
+        public Startup(IWebHostEnvironment environment)
+        {
+            Environment = environment;
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // uncomment, if you want to add an MVC-based UI
+            services.AddControllersWithViews();
+
             // configure identity server with in-memory stores, keys, clients and resources
-            services.AddIdentityServer()
-                .AddDeveloperSigningCredential()
-                .AddInMemoryApiResources(Config.GetApiResources())
-                .AddInMemoryClients(Config.GetClients());
+            var builder = services.AddIdentityServer()
+                .AddInMemoryIdentityResources(Config.IdentityResources)
+                .AddInMemoryApiScopes(Config.ApiScopes)
+                .AddInMemoryClients(Config.Clients)
+                //.AddInMemoryClients(ConfigGlobal.Clients)
+                .AddTestUsers(TestUsers.Users);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
