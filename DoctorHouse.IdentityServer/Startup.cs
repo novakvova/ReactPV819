@@ -8,16 +8,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityServerHost.Quickstart.UI;
+using Microsoft.EntityFrameworkCore;
+using DoctorHouse.DAL;
+using Microsoft.Extensions.Configuration;
+using DoctorHouse.DAL.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace DoctorHouse.IdentityServer
 {
     public class Startup
     {
         public IWebHostEnvironment Environment { get; }
+        public IConfiguration Configuration { get; }
 
-        public Startup(IWebHostEnvironment environment)
+        public Startup(IWebHostEnvironment environment, IConfiguration configuration)
         {
             Environment = environment;
+            Configuration = configuration;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -27,13 +34,23 @@ namespace DoctorHouse.IdentityServer
             // uncomment, if you want to add an MVC-based UI
             services.AddControllersWithViews();
 
+            services.AddDbContext<EFContext>(options =>
+              options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<DbUser, DbRole>(options =>
+                    options.Stores.MaxLengthForKeys = 128)
+                .AddEntityFrameworkStores<EFContext>()
+                .AddDefaultTokenProviders();
+
+
             // configure identity server with in-memory stores, keys, clients and resources
             var builder = services.AddIdentityServer()
                 .AddInMemoryIdentityResources(Config.IdentityResources)
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryClients(Config.Clients)
                 //.AddInMemoryClients(ConfigGlobal.Clients)
-                .AddTestUsers(TestUsers.Users);
+                //.AddTestUsers(TestUsers.Users);
+                .AddAspNetIdentity<DbUser>();
 
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
