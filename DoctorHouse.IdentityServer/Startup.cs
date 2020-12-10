@@ -13,6 +13,7 @@ using DoctorHouse.DAL;
 using Microsoft.Extensions.Configuration;
 using DoctorHouse.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace DoctorHouse.IdentityServer
 {
@@ -42,11 +43,11 @@ namespace DoctorHouse.IdentityServer
                 .AddEntityFrameworkStores<EFContext>()
                 .AddDefaultTokenProviders();
 
-
-            services.Configure<SecurityStampValidatorOptions>(options =>
-            {
-                options.ValidationInterval = TimeSpan.Zero;
-            });
+            //JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+            //services.Configure<SecurityStampValidatorOptions>(options =>
+            //{
+            //    options.ValidationInterval = TimeSpan.Zero;
+            //});
 
             // configure identity server with in-memory stores, keys, clients and resources
             var builder = services.AddIdentityServer()
@@ -78,6 +79,7 @@ namespace DoctorHouse.IdentityServer
             app.UseIdentityServer();
 
             // uncomment, if you want to add MVC
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
