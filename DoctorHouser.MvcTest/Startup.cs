@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace DoctorHouser.MvcTest
@@ -27,7 +28,9 @@ namespace DoctorHouser.MvcTest
         {
             services.AddControllersWithViews();
 
-            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+            //JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             services.AddAuthentication(options =>
             {
@@ -51,8 +54,18 @@ namespace DoctorHouser.MvcTest
                     options.Scope.Add("api1");
                     options.Scope.Add("offline_access");
                     options.ClaimActions.MapJsonKey("website", "website");
+                    options.ClaimActions.MapJsonKey(ClaimTypes.Role, ClaimTypes.Role);
+                    //options.ClaimActions.MapAll();
+
+
                 });
-            services.AddAuthorization();
+            //services.AddAuthorization(config =>
+            //{
+            //    config.AddPolicy("HasRole", builder =>
+            //    {
+            //        builder.RequireClaim(ClaimTypes.Role);
+            //    });
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -26,6 +26,7 @@ namespace DoctorHouser.MvcTest.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Privacy()
         {
+            
             return View();
         }
 

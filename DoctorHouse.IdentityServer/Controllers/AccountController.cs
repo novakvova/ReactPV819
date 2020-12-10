@@ -30,7 +30,7 @@ namespace DoctorHouse.IdentityServer.Controllers
         private readonly IClientStore _clientStore;
         private readonly IWebHostEnvironment _env;
         private readonly IEventService _events;
-
+       
         public AccountController(UserManager<DbUser> userManager,
             IIdentityServerInteractionService interaction,
             IAuthenticationSchemeProvider schemeProvider,
@@ -128,12 +128,12 @@ namespace DoctorHouse.IdentityServer.Controllers
                         // issue authentication cookie with subject ID and username
                         var isuser = new IdentityServerUser(user.Id.ToString())
                         {
-                            DisplayName = user.UserName,
-                            AdditionalClaims = new List<Claim>
-                            {
-                                new Claim(JwtClaimTypes.Role, "Admin"),
-                                new Claim(JwtClaimTypes.Role, "User"),
-                            }
+                            DisplayName = user.UserName//,
+                            //AdditionalClaims = new List<Claim>
+                            //{
+                            //    new Claim(JwtClaimTypes.Role, "Admin"),
+                            //    new Claim(JwtClaimTypes.Role, "User"),
+                            //}
                         };
 
                         await HttpContext.SignInAsync(isuser, props);

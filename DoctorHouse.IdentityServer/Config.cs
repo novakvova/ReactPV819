@@ -47,7 +47,8 @@ namespace DoctorHouse.IdentityServer
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        "api1"
+                        "api1",
+                        "roles"
                     },
                     AllowOfflineAccess = true,
                     RequirePkce = false
@@ -82,7 +83,7 @@ namespace DoctorHouse.IdentityServer
             new List<IdentityResource>
             {
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile(),
+                new IdentityResources.Profile()
             };
     }
 }

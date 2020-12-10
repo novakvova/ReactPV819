@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using DoctorHouse.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
 using System.IdentityModel.Tokens.Jwt;
+using IdentityServer4.Services;
 
 namespace DoctorHouse.IdentityServer
 {
@@ -43,6 +44,8 @@ namespace DoctorHouse.IdentityServer
                 .AddEntityFrameworkStores<EFContext>()
                 .AddDefaultTokenProviders();
 
+            
+
             //JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
             //services.Configure<SecurityStampValidatorOptions>(options =>
             //{
@@ -56,11 +59,13 @@ namespace DoctorHouse.IdentityServer
                 .AddInMemoryClients(Config.Clients)
                 //.AddInMemoryClients(ConfigGlobal.Clients)
                 //.AddTestUsers(TestUsers.Users);
-                .AddAspNetIdentity<DbUser>();
+                .AddAspNetIdentity<DbUser>()
+                .AddProfileService<ProfileService>();
 
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
 
+            //builder.Services.AddTransient<IProfileService, ProfileService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
