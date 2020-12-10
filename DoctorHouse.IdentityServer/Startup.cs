@@ -43,6 +43,11 @@ namespace DoctorHouse.IdentityServer
                 .AddDefaultTokenProviders();
 
 
+            services.Configure<SecurityStampValidatorOptions>(options =>
+            {
+                options.ValidationInterval = TimeSpan.Zero;
+            });
+
             // configure identity server with in-memory stores, keys, clients and resources
             var builder = services.AddIdentityServer()
                 .AddInMemoryIdentityResources(Config.IdentityResources)
