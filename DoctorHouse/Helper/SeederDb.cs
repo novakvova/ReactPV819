@@ -16,6 +16,8 @@ namespace DoctorHouse.Helper
             CreateUpdateRole(roleManager, Roles.Client);
 
             CreateUpdateUser(userManager, "admin@gmail.com", "Qwerty1*", Roles.Admin);
+            CreateUpdateUser(userManager, "doctor@gmail.com", "Qwerty1*", Roles.Doctor);
+            CreateUpdateUser(userManager, "client@gmail.com", "Qwerty1*", Roles.Client);
         }
 
         private static void CreateUpdateRole(RoleManager<DbRole> roleManager,
