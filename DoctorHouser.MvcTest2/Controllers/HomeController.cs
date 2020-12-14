@@ -23,7 +23,7 @@ namespace DoctorHouser.MvcTest2.Controllers
         {
             return View();
         }
-        [Authorize]
+        [Authorize(Roles = "Doctor")]
         public IActionResult Privacy()
         {
             return View();
