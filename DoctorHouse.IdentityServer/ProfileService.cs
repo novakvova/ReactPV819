@@ -15,23 +15,35 @@ namespace DoctorHouse.IdentityServer
 {
     public class ProfileService : IProfileService
     {
-        public ProfileService() { }
-        public Task GetProfileDataAsync(ProfileDataRequestContext context)
+        private readonly UserManager<DbUser> _userStore;
+        public ProfileService(UserManager<DbUser> userStore)
         {
-            //var claims = new List<Claim>
-            //{
-            //    new Claim(JwtClaimTypes.Role, "Admin")
-            //};
-            //context.IssuedClaims.AddRange(claims);
-            //context.IssuedClaims.AddRange(new List<Claim>() { new Claim(ClaimTypes.Role, "Admin") });
-            context.IssuedClaims.AddRange(new List<Claim>() { 
-                new Claim(ClaimTypes.Role, "Admin"),
-                new Claim(ClaimTypes.Role, "User") });
-            return Task.CompletedTask;
+            this._userStore = userStore;
+        }
+        public async Task GetProfileDataAsync(ProfileDataRequestContext context)
+        {
+            var id = long.Parse(context.Subject.GetSubjectId());
+            var user = this._userStore.Users
+                .SingleOrDefault(x => x.Id == id);
+            if (user != null)
+            {
+                // get user roles
+                var roles = await _userStore.GetRolesAsync(user);
+                var userClaims = new List<Claim>();
+                foreach (var role in roles)
+                {
+                    userClaims.Add(new Claim(ClaimTypes.Role, role));
+                }
+                context.IssuedClaims.AddRange(userClaims);
+            }
         }
 
         public Task IsActiveAsync(IsActiveContext context)
         {
+            var id = long.Parse(context.Subject.GetSubjectId());
+            var user = this._userStore.Users
+                .SingleOrDefault(x => x.Id == id);
+            context.IsActive = user != null;
             return Task.CompletedTask;
         }
     }
