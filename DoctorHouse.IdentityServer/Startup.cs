@@ -15,6 +15,7 @@ using DoctorHouse.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
 using System.IdentityModel.Tokens.Jwt;
 using IdentityServer4.Services;
+using System.Reflection;
 
 namespace DoctorHouse.IdentityServer
 {
@@ -44,19 +45,29 @@ namespace DoctorHouse.IdentityServer
                 .AddEntityFrameworkStores<EFContext>()
                 .AddDefaultTokenProviders();
 
-            
 
             //JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
             //services.Configure<SecurityStampValidatorOptions>(options =>
             //{
             //    options.ValidationInterval = TimeSpan.Zero;
             //});
-
+            var migrationAssembly = typeof(EFContext).GetTypeInfo().Assembly.GetName().Name;
             // configure identity server with in-memory stores, keys, clients and resources
             var builder = services.AddIdentityServer()
-                .AddInMemoryIdentityResources(Config.IdentityResources)
-                .AddInMemoryApiScopes(Config.ApiScopes)
-                .AddInMemoryClients(Config.Clients)
+                .AddConfigurationStore(options =>
+                {
+                    options.ConfigureDbContext = b => b.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
+                    sql => sql.MigrationsAssembly(migrationAssembly));
+                })
+                .AddOperationalStore(options => 
+                {
+                    options.ConfigureDbContext = b => b.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
+                    sql => sql.MigrationsAssembly(migrationAssembly));
+                })
+                //.AddInMemoryIdentityResources(Config.IdentityResources)
+                //.AddInMemoryApiScopes(Config.ApiScopes)
+                //.AddInMemoryClients(Config.Clients)
+                
                 //.AddInMemoryClients(ConfigGlobal.Clients)
                 //.AddTestUsers(TestUsers.Users);
                 .AddAspNetIdentity<DbUser>()
@@ -98,6 +109,7 @@ namespace DoctorHouse.IdentityServer
             //        await context.Response.WriteAsync("Hello World!");
             //    });
             //});
+            DatabaseInitializer.Init(app.ApplicationServices);
         }
     }
 }
