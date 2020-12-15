@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoctorHouse.IdentityServer"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoctorHouser.MvcTest", "DoctorHouser.MvcTest\DoctorHouser.MvcTest.csproj", "{4E3617FD-FAD3-4052-9B10-8A3EAA0AE376}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorHouser.MvcTest2", "DoctorHouser.MvcTest2\DoctorHouser.MvcTest2.csproj", "{63BF5614-2579-4BDD-A3BB-A5723BFA9BE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoctorHouser.MvcTest2", "DoctorHouser.MvcTest2\DoctorHouser.MvcTest2.csproj", "{63BF5614-2579-4BDD-A3BB-A5723BFA9BE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorHouse.WebApi", "DoctorHouse.WebApi\DoctorHouse.WebApi.csproj", "{6735A4B5-5969-4C46-9C5B-FBB324431900}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{63BF5614-2579-4BDD-A3BB-A5723BFA9BE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63BF5614-2579-4BDD-A3BB-A5723BFA9BE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63BF5614-2579-4BDD-A3BB-A5723BFA9BE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6735A4B5-5969-4C46-9C5B-FBB324431900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6735A4B5-5969-4C46-9C5B-FBB324431900}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6735A4B5-5969-4C46-9C5B-FBB324431900}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6735A4B5-5969-4C46-9C5B-FBB324431900}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
