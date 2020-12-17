@@ -77,6 +77,57 @@ namespace DoctorHouse.IdentityServer
                     },
                     AllowOfflineAccess = true,
                     RequirePkce = false
+                },
+
+                // interactive ASP.NET Core MVC client karpaty.tk
+                new Client
+                {
+                    ClientId = "karpaty.tk",
+                    ClientName = "MVC Client",
+                    AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
+
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+
+                    RedirectUris           = { "https://karpaty.tk/signin-oidc" },
+                    PostLogoutRedirectUris = { "https://karpaty.tk/signout-callback-oidc" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api1",
+                        "roles"
+                    },
+                    AllowOfflineAccess = true,
+                    RequirePkce = false
+                },
+                // interactive ASP.NET Core MVC client2 shopcore.tk
+                new Client
+                {
+                    ClientId = "shopcore.tk",
+                    ClientName = "MVC Client",
+                    AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
+
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+
+                    RedirectUris           = { "https://shopcore.tk/signin-oidc" },
+                    PostLogoutRedirectUris = { "https://shopcore.tk/signout-callback-oidc" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api1",
+                        "roles"
+                    },
+                    AllowOfflineAccess = true,
+                    RequirePkce = false
                 }
             };
 

@@ -1,10 +1,12 @@
-﻿using DoctorHouse.Constants;
+﻿using DoctorHouse.DAL.Constants;
 using DoctorHouse.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace DoctorHouse.Helper
+namespace DoctorHouse.DAL.Helper
 {
     public class SeederDB
     {
@@ -49,7 +51,7 @@ namespace DoctorHouse.Helper
                 result = userManager.AddToRoleAsync(user, role).Result;
             }
         }
-        
+
         public static void SeedDataByAS(IServiceProvider services)
         {
             using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())

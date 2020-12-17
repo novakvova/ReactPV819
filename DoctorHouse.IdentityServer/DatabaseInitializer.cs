@@ -1,4 +1,5 @@
 ﻿using DoctorHouse.DAL.Entities;
+using DoctorHouse.DAL.Helper;
 using IdentityModel;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
@@ -19,13 +20,12 @@ namespace DoctorHouse.IdentityServer
 
         public static void Init(IServiceProvider services)
         {
+            SeederDB.SeedDataByAS(services);
+
             using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                //scopeServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
-
+                
                 var context = scope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
-
-                //scopeServiceProvider.GetRequiredService<ConfigurationDbContext>();
                 context.Database.Migrate();
                 if (!context.Clients.Any())
                 {

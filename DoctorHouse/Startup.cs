@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using DoctorHouse.DAL;
 using DoctorHouse.DAL.Entities;
+using DoctorHouse.DAL.Helper;
 using DoctorHouse.Helper;
 using DoctorHouse.Infrastructure.Interfaces;
 using DoctorHouse.Infrastructure.Services;

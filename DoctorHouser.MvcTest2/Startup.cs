@@ -41,7 +41,7 @@ namespace DoctorHouser.MvcTest2
                     options.SignInScheme = "Cookies";
                     options.Authority = Configuration.GetValue<string>("IdentityServer");
 
-                    options.ClientId = "mvc2";
+                    options.ClientId = "mvc2"; //"shopcore.tk";//
                     options.ClientSecret = "secret";
                     options.UsePkce = false;
                     options.ResponseType = "code id_token";

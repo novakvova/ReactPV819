@@ -43,7 +43,7 @@ namespace DoctorHouser.MvcTest
                     options.SignInScheme = "Cookies";
                     options.Authority = Configuration.GetValue<string>("IdentityServer");
 
-                    options.ClientId = "mvc";
+                    options.ClientId = "mvc";//"karpaty.tk"; //
                     options.ClientSecret = "secret";
                     options.UsePkce = false;
                     options.ResponseType = "code id_token";
