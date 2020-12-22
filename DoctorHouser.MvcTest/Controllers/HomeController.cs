@@ -26,7 +26,9 @@ namespace DoctorHouser.MvcTest.Controllers
         [Authorize(Roles = "admin")]
         public IActionResult Privacy()
         {
-            
+            var role = HttpContext.User.IsInRole("admin");
+
+
             return View();
         }
 

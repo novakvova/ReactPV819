@@ -54,20 +54,22 @@ namespace DoctorHouse.IdentityServer
             var migrationAssembly = typeof(EFContext).GetTypeInfo().Assembly.GetName().Name;
             // configure identity server with in-memory stores, keys, clients and resources
             var builder = services.AddIdentityServer()
-                .AddConfigurationStore(options =>
-                {
-                    options.ConfigureDbContext = b => b.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
-                    sql => sql.MigrationsAssembly(migrationAssembly));
-                })
-                .AddOperationalStore(options => 
-                {
-                    options.ConfigureDbContext = b => b.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
-                    sql => sql.MigrationsAssembly(migrationAssembly));
-                })
-                //.AddInMemoryIdentityResources(Config.IdentityResources)
-                //.AddInMemoryApiScopes(Config.ApiScopes)
-                //.AddInMemoryClients(Config.Clients)
-                
+                //.AddConfigurationStore(options =>
+                //{
+                //    options.ConfigureDbContext = b => b.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
+                //    sql => sql.MigrationsAssembly(migrationAssembly));
+                //})
+                //.AddOperationalStore(options => 
+                //{
+                //    options.ConfigureDbContext = b => b.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
+                //    sql => sql.MigrationsAssembly(migrationAssembly));
+                //})
+
+                 .AddInMemoryClients(Config.Clients)
+                .AddInMemoryApiResources(Config.ApiResources)
+                .AddInMemoryIdentityResources(Config.IdentityResources)
+                .AddInMemoryApiScopes(Config.ApiScopes) // IdentityServer4 version 4.x.x changes
+
                 //.AddInMemoryClients(ConfigGlobal.Clients)
                 //.AddTestUsers(TestUsers.Users);
                 .AddAspNetIdentity<DbUser>()
@@ -76,13 +78,15 @@ namespace DoctorHouse.IdentityServer
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
 
+            services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader()));
             //builder.Services.AddTransient<IProfileService, ProfileService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -92,6 +96,7 @@ namespace DoctorHouse.IdentityServer
             app.UseStaticFiles();
             app.UseRouting();
 
+            app.UseCors("AllowAll");
             app.UseIdentityServer();
 
             // uncomment, if you want to add MVC

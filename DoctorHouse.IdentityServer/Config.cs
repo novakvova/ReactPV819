@@ -12,8 +12,17 @@ namespace DoctorHouse.IdentityServer
         public static IEnumerable<ApiScope> ApiScopes =>
             new List<ApiScope>
             {
-                new ApiScope("api1", "My API")
+                new ApiScope("api1", "My API"),
+                new ApiScope("OrdersAPI", "Orders API")
             };
+
+        public static IEnumerable<ApiResource> ApiResources =>
+            new List<ApiResource>
+            {
+                new ApiResource("OrdersAPI")
+            };
+        
+
 
         public static IEnumerable<Client> Clients =>
             new List<Client>
@@ -27,6 +36,19 @@ namespace DoctorHouse.IdentityServer
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     // scopes that client has access to
                     AllowedScopes = { "api1" }
+                },
+                new Client
+                {
+                    ClientId = "client_id",
+                    ClientSecrets = { new Secret("client_secret".Sha256()) },
+
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedScopes =
+                    {
+                        "OrdersAPI",
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    }
                 },
                 // interactive ASP.NET Core MVC client
                 new Client
@@ -128,6 +150,24 @@ namespace DoctorHouse.IdentityServer
                     },
                     AllowOfflineAccess = true,
                     RequirePkce = false
+                },
+
+                new Client
+                {
+                    ClientId = "client_id_js",
+                    RequireClientSecret = false,
+                    RequireConsent = false,
+                    RequirePkce = true,
+                    AllowedGrantTypes =  GrantTypes.Code,
+                    AllowedCorsOrigins = { "https://localhost:9005" },
+                    RedirectUris = { "https://localhost:9005/callback.html", "https://localhost:9005/refresh.html" },
+                    PostLogoutRedirectUris = { "https://localhost:9005/index.html" },
+                    AllowedScopes =
+                    {
+                        "OrdersAPI",
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    }
                 }
             };
 

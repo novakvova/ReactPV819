@@ -17,7 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoctorHouser.MvcTest2", "Do
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoctorHouse.WebApi", "DoctorHouse.WebApi\DoctorHouse.WebApi.csproj", "{6735A4B5-5969-4C46-9C5B-FBB324431900}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorHouse.ConosleClient", "DoctorHouse.ConosleClient\DoctorHouse.ConosleClient.csproj", "{68F34DE1-93F0-4150-81D5-880DFAEF3D2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoctorHouse.ConosleClient", "DoctorHouse.ConosleClient\DoctorHouse.ConosleClient.csproj", "{68F34DE1-93F0-4150-81D5-880DFAEF3D2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorHouse.JavaScript", "DoctorHouse.JavaScript\DoctorHouse.JavaScript.csproj", "{4497CED6-1D03-48BF-B66B-95A61C6220AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorHouse.Orders.Api", "DoctorHouse.Orders.Api\DoctorHouse.Orders.Api.csproj", "{417B5442-25C1-4565-A36D-473E8A90EB6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,14 @@ Global
 		{68F34DE1-93F0-4150-81D5-880DFAEF3D2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68F34DE1-93F0-4150-81D5-880DFAEF3D2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68F34DE1-93F0-4150-81D5-880DFAEF3D2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4497CED6-1D03-48BF-B66B-95A61C6220AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4497CED6-1D03-48BF-B66B-95A61C6220AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4497CED6-1D03-48BF-B66B-95A61C6220AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4497CED6-1D03-48BF-B66B-95A61C6220AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{417B5442-25C1-4565-A36D-473E8A90EB6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{417B5442-25C1-4565-A36D-473E8A90EB6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{417B5442-25C1-4565-A36D-473E8A90EB6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{417B5442-25C1-4565-A36D-473E8A90EB6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

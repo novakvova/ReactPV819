@@ -22,52 +22,61 @@ namespace DoctorHouse.IdentityServer
         {
             SeederDB.SeedDataByAS(services);
 
-            using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
+            //using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            //{
                 
-                var context = scope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
-                context.Database.Migrate();
-                if (!context.Clients.Any())
-                {
-                    foreach (var client in Config.Clients)
-                    {
-                        context.Clients.Add(client.ToEntity());
-                    }
-                    context.SaveChanges();
-                }
+            //    var context = scope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+            //    context.Database.Migrate();
+            //    if (!context.Clients.Any())
+            //    {
+            //        foreach (var client in Config.Clients)
+            //        {
+            //            context.Clients.Add(client.ToEntity());
+            //        }
+            //        context.SaveChanges();
+            //    }
 
-                if (!context.IdentityResources.Any())
-                {
-                    foreach (var resource in Config.IdentityResources)
-                    {
-                        context.IdentityResources.Add(resource.ToEntity());
-                    }
-                    context.SaveChanges();
-                }
+            //    if(!context.ApiResources.Any())
+            //    {
+            //        foreach (var apiResource in Config.ApiResources)
+            //        {
+            //            context.ApiResources.Add(apiResource.ToEntity());
+            //        }
+            //        context.SaveChanges();
+            //    }
 
-                if (!context.ApiScopes.Any())
-                {
-                    foreach (var resource in Config.ApiScopes)
-                    {
-                        context.ApiScopes.Add(resource.ToEntity());
-                    }
-                    context.SaveChanges();
-                }
-                //if (!context.ApiResources.Any())
-                //{
-                //    foreach (var resource in Config.ApiScopes)
-                //    {
-                //        context.ApiResources.Add(resource.ToEntity());
-                //    }
-                //    context.SaveChanges();
-                //}
+            //    if (!context.IdentityResources.Any())
+            //    {
+            //        foreach (var resource in Config.IdentityResources)
+            //        {
+            //            context.IdentityResources.Add(resource.ToEntity());
+            //        }
+            //        context.SaveChanges();
+            //    }
+
+            //    if (!context.ApiScopes.Any())
+            //    {
+            //        foreach (var resource in Config.ApiScopes)
+            //        {
+            //            context.ApiScopes.Add(resource.ToEntity());
+            //        }
+            //        context.SaveChanges();
+            //    }
+            //    //if (!context.ApiResources.Any())
+            //    //{
+            //    //    foreach (var resource in Config.ApiScopes)
+            //    //    {
+            //    //        context.ApiResources.Add(resource.ToEntity());
+            //    //    }
+            //    //    context.SaveChanges();
+            //    //}
 
 
 
-                //var manager = scope.ServiceProvider.GetRequiredService<UserManager<DbUser>>();
-                //var managerRole = scope.ServiceProvider.GetRequiredService<RoleManager<DbRole>>();
-                //SeederDB.SeedData(manager, managerRole);
-            }
+            //    //var manager = scope.ServiceProvider.GetRequiredService<UserManager<DbUser>>();
+            //    //var managerRole = scope.ServiceProvider.GetRequiredService<RoleManager<DbRole>>();
+            //    //SeederDB.SeedData(manager, managerRole);
+            //}
             
         }
     }
